@@ -64,8 +64,8 @@ out_path_RCM_pr_nbc_50km=nobackup_stepanov+"icclim_indices_DRS_conventions/RCM/p
 
 # Hindcast or projections
 #
-experiment = 'historical'
-#experiment = 'rcp45'
+#experiment = 'historical'
+experiment = 'rcp45'
 
 
 # =====================================================================================================
@@ -219,7 +219,7 @@ models_list_50km_HadGEM = ['MOHC-HadGEM2-ES']
 # Important!
 # =========================================================================
 # Declare which indices you want to calculate using lists
-indice_list_pp = ['RX1day','PRCPTOT']  #R95p RX1day RR1 PRCPTOT
+indice_list_pp = ['RX1day','PRCPTOT','RR1']  #R95p RX1day RR1 PRCPTOT
 #indice_pp = 'RR1'
 # =========================================================================
 
@@ -232,12 +232,12 @@ base_dt1_HadGEM = datetime.datetime(1981,01,01)
 base_dt2_HadGEM = datetime.datetime(2010,12,30)
 
 # Analysis period
-yy_dt1=1970
+yy_dt1=2006
 mm_dt1=01
 dd_dt1=01
 #
-yy_dt2=2005
-mm_dt2=12
+yy_dt2=2099
+mm_dt2=11  # 12 for historical
 dd_dt2=30
 #
 dt1_HadGEM = datetime.datetime(yy_dt1,mm_dt1,dd_dt1)
@@ -311,18 +311,18 @@ for model in models_list_50km_HadGEM:
 
 		# ======================== BIAS Corrected ======================== #
         # W/ base period
-		#indice_out_name = out_path_RCM_pr_nbc_50km+indice_pp+"_icclim_KNMI_"+model+"_rcp45_r12i1p1_SMHI-RCA4_v1-SMHI-DBS43-EOBS10-1981-2010_EUR-44_day_"+year_dt1+month_dt1+day_dt1+"_to_"+year_dt2+month_dt2+day_dt2+"_"+model+"_1981-2010"'.nc'  # new DRS guideline 23.05.2016.
+		#indice_out_name = out_path_RCM_pr_nbc_50km+indice_pp+"_icclim_KNMI_"+model+"_rcp45_r1i1p1_SMHI-RCA4_v1-SMHI-DBS43-EOBS10-1981-2010_EUR-44_day_"+year_dt1+month_dt1+day_dt1+"_to_"+year_dt2+month_dt2+day_dt2+"_"+model+"_1981-2010"'.nc'  # new DRS guideline 23.05.2016.
 		# W/O base period
-		#indice_out_name = out_path_RCM_pr_nbc_50km+indice_pp+"_icclim_KNMI_"+model+"_rcp45_r12i1p1_SMHI-RCA4_v1-SMHI-DBS43-EOBS10-1981-2010_EUR-44_day_"+year_dt1+month_dt1+day_dt1+"_to_"+year_dt2+month_dt2+day_dt2+"_na.nc"                     # new DRS guideline 23.05.2016.
+		#indice_out_name = out_path_RCM_pr_nbc_50km+indice_pp+"_icclim_KNMI_"+model+"_rcp45_r1i1p1_SMHI-RCA4_v1-SMHI-DBS43-EOBS10-1981-2010_EUR-44_day_"+year_dt1+month_dt1+day_dt1+"_to_"+year_dt2+month_dt2+day_dt2+"_na.nc"                     # new DRS guideline 23.05.2016.
 		#print 'Going into output file:', indice_out_name
 		#print
 
         
 		# ====================== NON-BIAS Corrected ====================== #
         # W/ base period
-		#indice_out_name = out_path_RCM_pr_nbc_50km+indice_pp+"_icclim_KNMI_"+model+'_'+experiment+"_r12i1p1_SMHI-RCA4_v1_EUR-44_day_"+year_dt1+month_dt1+day_dt1+"_to_"+year_dt2+month_dt2+day_dt2+"_1981-2010"'.nc'  # new DRS guideline 23.05.2016.
+		#indice_out_name = out_path_RCM_pr_nbc_50km+indice_pp+"_icclim_KNMI_"+model+'_'+experiment+"_r1i1p1_SMHI-RCA4_v1_EUR-44_day_"+year_dt1+month_dt1+day_dt1+"_to_"+year_dt2+month_dt2+day_dt2+"_1981-2010"'.nc'  # new DRS guideline 23.05.2016.
 		# W/O base period
-		indice_out_name = out_path_RCM_pr_nbc_50km+indice_pp+"_icclim_KNMI_"+model+'_'+experiment+"_r12i1p1_SMHI-RCA4_v1_EUR-44_day_"+year_dt1+month_dt1+day_dt1+"_to_"+year_dt2+month_dt2+day_dt2+"_na.nc"            # new DRS guideline 23.05.2016.
+		indice_out_name = out_path_RCM_pr_nbc_50km+indice_pp+"_icclim_KNMI_"+model+'_'+experiment+"_r1i1p1_SMHI-RCA4_v1_EUR-44_day_"+year_dt1+month_dt1+day_dt1+"_to_"+year_dt2+month_dt2+day_dt2+"_na.nc"            # new DRS guideline 23.05.2016.
 		print 'Going into output file:', indice_out_name
 		print
 
