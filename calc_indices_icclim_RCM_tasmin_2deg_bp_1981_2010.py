@@ -64,72 +64,72 @@ out_path_RCM_tasmin_2deg=nobackup_stepanov+"icclim_indices/RCM/tasmin/2deg/"
 # Debug model list. IPSL has time range issue
 #models_list_2deg = ['CanESM2','CNRM-CM5','NorESM1-M','MIROC5','GFDL-ESM2M','MPI-ESM-LR']
 
-for model in models_list_2deg:
+# for model in models_list_2deg:
 
-	tasmin_2deg_file_root="tasminAdjust_day_"+model+"-EUR-2deg_rcp45_r1i1p1-SMHI-DBS43-EOBS10-1981-2010_"
-
-
-# Desired periods
-	period_2deg_historical='19510101-20051231'
-	period_2deg_projection='20060101-21001231'
+# 	tasmin_2deg_file_root="tasminAdjust_day_"+model+"-EUR-2deg_rcp45_r1i1p1-SMHI-DBS43-EOBS10-1981-2010_"
 
 
-	file_tasmin_2deg_RCM_ref = in_path_RCM_tasmin_2deg+tasmin_2deg_file_root+period_2deg_historical+'.nc'
-	file_tasmin_2deg_RCM     = in_path_RCM_tasmin_2deg+tasmin_2deg_file_root+period_2deg_projection+'.nc'
-
-	print 'In file [historical]',file_tasmin_2deg_RCM_ref
-	print 'In file [projections]',file_tasmin_2deg_RCM
-
-	files_tasmin_2deg = [file_tasmin_2deg_RCM_ref,file_tasmin_2deg_RCM]
-
-#quit()
+# # Desired periods
+# 	period_2deg_historical='19510101-20051231'
+# 	period_2deg_projection='20060101-21001231'
 
 
-# =========================================================================
-# Processing periods
+# 	file_tasmin_2deg_RCM_ref = in_path_RCM_tasmin_2deg+tasmin_2deg_file_root+period_2deg_historical+'.nc'
+# 	file_tasmin_2deg_RCM     = in_path_RCM_tasmin_2deg+tasmin_2deg_file_root+period_2deg_projection+'.nc'
 
-# Base period
-	base_dt1 = datetime.datetime(1981,01,01)
-	base_dt2 = datetime.datetime(2010,12,31)
+# 	print 'In file [historical]',file_tasmin_2deg_RCM_ref
+# 	print 'In file [projections]',file_tasmin_2deg_RCM
 
-# Analysis period
-	dt1 = datetime.datetime(2006,01,01)
-	dt2 = datetime.datetime(2100,12,31)
-# =========================================================================
+# 	files_tasmin_2deg = [file_tasmin_2deg_RCM_ref,file_tasmin_2deg_RCM]
+
+# #quit()
 
 
-# Important!
-# =========================================================================
-# Declare which indices you want to calculate using lists
-	indice_list_tasmin = ['FD']
-# =========================================================================
+# # =========================================================================
+# # Processing periods
+
+# # Base period
+# 	base_dt1 = datetime.datetime(1981,01,01)
+# 	base_dt2 = datetime.datetime(2010,12,31)
+
+# # Analysis period
+# 	dt1 = datetime.datetime(2006,01,01)
+# 	dt2 = datetime.datetime(2100,12,31)
+# # =========================================================================
 
 
-# =========================================================================
-# Calculate actual indices: ICCLIM syntax only
-# =========================================================================
-
-	for indice_tasmin in indice_list_tasmin:
-		print
-		print 'Now calculating indice', indice_tasmin,':'
-		print 'Using the model', model
-		print
+# # Important!
+# # =========================================================================
+# # Declare which indices you want to calculate using lists
+# 	indice_list_tasmin = ['FD']
+# # =========================================================================
 
 
-# Build output file name construction phase
-		calc_indice_tasmin = out_path_RCM_tasmin_2deg+indice_tasmin+"_"+model+'_tasmin.nc'
-		print 'Going into output file:', calc_indice_tasmin
-		print
+# # =========================================================================
+# # Calculate actual indices: ICCLIM syntax only
+# # =========================================================================
+
+# 	for indice_tasmin in indice_list_tasmin:
+# 		print
+# 		print 'Now calculating indice', indice_tasmin,':'
+# 		print 'Using the model', model
+# 		print
+
+
+# # Build output file name construction phase
+# 		calc_indice_tasmin = out_path_RCM_tasmin_2deg+indice_tasmin+"_"+model+'_tasmin.nc'
+# 		print 'Going into output file:', calc_indice_tasmin
+# 		print
 
 	
-		icclim.indice(indice_name=indice_tasmin,
-	    	          in_files=files_tasmin_2deg,
-	        	      var_name='tasminAdjust', 
-                	  #slice_mode='AMJJAS', 
-         	          time_range=[dt1,dt2], 
-            	      base_period_time_range=[base_dt1, base_dt2],
-                	  out_file=calc_indice_tasmin, 
-                 	  callback=callback.defaultCallback2)
+# 		icclim.indice(indice_name=indice_tasmin,
+# 	    	          in_files=files_tasmin_2deg,
+# 	        	      var_name='tasminAdjust', 
+#                 	  #slice_mode='AMJJAS', 
+#          	          time_range=[dt1,dt2], 
+#             	      base_period_time_range=[base_dt1, base_dt2],
+#                 	  out_file=calc_indice_tasmin, 
+#                  	  callback=callback.defaultCallback2)
 
 
 
@@ -140,96 +140,16 @@ for model in models_list_2deg:
 #=================================================================================================
 # HadGEM mode (period ends iwth yyyy1230!)
 
-#models_list_2deg_HadGEM = ['HadGEM2-ES']
+models_list_2deg_HadGEM = ['HadGEM2-ES']
 
-#for model in models_list_2deg_HadGEM:
+for model in models_list_2deg_HadGEM:
 
-#	tasmin_2deg_file_root="tasminAdjust_day_"+model+"-EUR-2deg_rcp45_r1i1p1-SMHI-DBS43-EOBS10-1981-2010_"
-
-
-# Desired periods
-#	period_2deg_historical='19510101-20051230'
-#	period_2deg_projection='20060101-21001230'
+	tasmin_2deg_file_root="tasminAdjust_day_"+model+"-EUR-2deg_rcp45_r1i1p1-SMHI-DBS43-EOBS10-1981-2010_"
 
 
-#	file_tasmin_2deg_RCM_ref = in_path_RCM_tasmin_2deg+tasmin_2deg_file_root+period_2deg_historical+'.nc'
-#	file_tasmin_2deg_RCM     = in_path_RCM_tasmin_2deg+tasmin_2deg_file_root+period_2deg_projection+'.nc'
-
-#	print file_tasmin_2deg_RCM_ref
-#	print file_tasmin_2deg_RCM
-
-#	files_tasmin_2deg = [file_tasmin_2deg_RCM_ref,file_tasmin_2deg_RCM]
-
-#quit()
-
-
-# =========================================================================
-# Processing periods
-
-# Base period
-#	base_dt1_HadGEM = datetime.datetime(1981,01,01)
-#	base_dt2_HadGEM = datetime.datetime(2010,12,30)
-
-# Analysis period
-#	dt1_HadGEM = datetime.datetime(2006,01,01)
-#	dt2_HadGEM = datetime.datetime(2100,12,30)
-# =========================================================================
-
-
-
-# Important!
-# =========================================================================
-# Declare which indices you want to calculate using lists
-
-#	indice_list_tasmin = ['FD']
-
-# =========================================================================
-
-
-
-# =========================================================================
-# Calculate actual indices: ICCLIM syntax only
-# =========================================================================
-
-#	for indice_tasmin in indice_list_tasmin:
-#		print
-#		print 'Now calculating indice', indice_tasmin,':'
-#		print 'Using the model', model
-#		print
-
-
-# Build output file name construction phase
-#		calc_indice_tasmin = out_path_RCM_tasmin_2deg+indice_tasmin+"_"+model+'_tasmin.nc'
-#		print 'Going into output file:', calc_indice_tasmin
-#		print
-
-	
-#		icclim.indice(indice_name=indice_tasmin,
-#	    	          in_files=files_tasmin_2deg,
-#	        	      var_name='tasminAdjust', 
-    	           	  #slice_mode='AMJJAS', 
-#	       	          time_range=[dt1_HadGEM,dt2_HadGEM], 
-         	          #ignore_Feb29th=True,
- #           	      base_period_time_range=[base_dt1_HadGEM, base_dt2_HadGEM],
-  #              	  out_file=calc_indice_tasmin, 
-   #              	  callback=callback.defaultCallback2)
-
-
-
-
-#=================================================================================================
-# EC Earth model (r12i1pi in file name!)
-
-models_list_2deg_EC_EARTH = ['EC-EARTH']
-
-for model in models_list_2deg_EC_EARTH:
-
-	tasmin_2deg_file_root="tasminAdjust_day_"+model+"-EUR-2deg_rcp45_r12i1p1-SMHI-DBS43-EOBS10-1981-2010_"
-
-
-# Desired periods
-	period_2deg_historical='19510101-20051231'
-	period_2deg_projection='20060101-21001231'
+#Desired periods
+	period_2deg_historical='19510101-20051230'
+	period_2deg_projection='20060101-21001230'
 
 
 	file_tasmin_2deg_RCM_ref = in_path_RCM_tasmin_2deg+tasmin_2deg_file_root+period_2deg_historical+'.nc'
@@ -240,19 +160,17 @@ for model in models_list_2deg_EC_EARTH:
 
 	files_tasmin_2deg = [file_tasmin_2deg_RCM_ref,file_tasmin_2deg_RCM]
 
-#quit()
-
 
 # =========================================================================
 # Processing periods
 
 # Base period
-	base_dt1 = datetime.datetime(1981,01,01)
-	base_dt2 = datetime.datetime(2010,12,31)
+	base_dt1_HadGEM = datetime.datetime(1981,01,01)
+	base_dt2_HadGEM = datetime.datetime(2010,12,30)
 
 # Analysis period
-	dt1 = datetime.datetime(2006,01,01)
-	dt2 = datetime.datetime(2100,12,31)
+	dt1_HadGEM = datetime.datetime(2006,01,01)
+	dt2_HadGEM = datetime.datetime(2100,12,30)
 # =========================================================================
 
 
@@ -260,7 +178,9 @@ for model in models_list_2deg_EC_EARTH:
 # Important!
 # =========================================================================
 # Declare which indices you want to calculate using lists
+
 	indice_list_tasmin = ['FD']
+
 # =========================================================================
 
 
@@ -285,11 +205,89 @@ for model in models_list_2deg_EC_EARTH:
 		icclim.indice(indice_name=indice_tasmin,
 	    	          in_files=files_tasmin_2deg,
 	        	      var_name='tasminAdjust', 
-                	  #slice_mode='AMJJAS', 
-         	          time_range=[dt1,dt2], 
-            	      base_period_time_range=[base_dt1, base_dt2],
-                	  out_file=calc_indice_tasmin, 
-                 	  callback=callback.defaultCallback2)
+    	           	  slice_mode='AMJJAS', 
+	       	          time_range=[dt1_HadGEM,dt2_HadGEM], 
+         	          ignore_Feb29th=True,
+           	          base_period_time_range=[base_dt1_HadGEM, base_dt2_HadGEM],
+               	      out_file=calc_indice_tasmin, 
+                	  callback=callback.defaultCallback2)
+
+
+
+
+#=================================================================================================
+# EC Earth model (r12i1pi in file name!)
+
+# models_list_2deg_EC_EARTH = ['EC-EARTH']
+
+# for model in models_list_2deg_EC_EARTH:
+
+# 	tasmin_2deg_file_root="tasminAdjust_day_"+model+"-EUR-2deg_rcp45_r12i1p1-SMHI-DBS43-EOBS10-1981-2010_"
+
+
+# # Desired periods
+# 	period_2deg_historical='19510101-20051231'
+# 	period_2deg_projection='20060101-21001231'
+
+
+# 	file_tasmin_2deg_RCM_ref = in_path_RCM_tasmin_2deg+tasmin_2deg_file_root+period_2deg_historical+'.nc'
+# 	file_tasmin_2deg_RCM     = in_path_RCM_tasmin_2deg+tasmin_2deg_file_root+period_2deg_projection+'.nc'
+
+# 	print file_tasmin_2deg_RCM_ref
+# 	print file_tasmin_2deg_RCM
+
+# 	files_tasmin_2deg = [file_tasmin_2deg_RCM_ref,file_tasmin_2deg_RCM]
+
+# #quit()
+
+
+# # =========================================================================
+# # Processing periods
+
+# # Base period
+# 	base_dt1 = datetime.datetime(1981,01,01)
+# 	base_dt2 = datetime.datetime(2010,12,31)
+
+# # Analysis period
+# 	dt1 = datetime.datetime(2006,01,01)
+# 	dt2 = datetime.datetime(2100,12,31)
+# # =========================================================================
+
+
+
+# # Important!
+# # =========================================================================
+# # Declare which indices you want to calculate using lists
+# 	indice_list_tasmin = ['FD']
+# # =========================================================================
+
+
+
+# # =========================================================================
+# # Calculate actual indices: ICCLIM syntax only
+# # =========================================================================
+
+# 	for indice_tasmin in indice_list_tasmin:
+# 		print
+# 		print 'Now calculating indice', indice_tasmin,':'
+# 		print 'Using the model', model
+# 		print
+
+
+# # Build output file name construction phase
+# 		calc_indice_tasmin = out_path_RCM_tasmin_2deg+indice_tasmin+"_"+model+'_tasmin.nc'
+# 		print 'Going into output file:', calc_indice_tasmin
+# 		print
+
+	
+# 		icclim.indice(indice_name=indice_tasmin,
+# 	    	          in_files=files_tasmin_2deg,
+# 	        	      var_name='tasminAdjust', 
+#                 	  #slice_mode='AMJJAS', 
+#          	          time_range=[dt1,dt2], 
+#             	      base_period_time_range=[base_dt1, base_dt2],
+#                 	  out_file=calc_indice_tasmin, 
+#                  	  callback=callback.defaultCallback2)
 
 
 

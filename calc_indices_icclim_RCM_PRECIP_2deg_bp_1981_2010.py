@@ -152,153 +152,151 @@ out_path_RCM_pr_2deg=nobackup_stepanov+"icclim_indices/RCM/pr/2deg/"
 #=================================================================================================
 # HadGEM mode (period ends iwth yyyy1230!)
 
-# models_list_2deg_HadGEM = ['HadGEM2-ES']
+models_list_2deg_HadGEM = ['HadGEM2-ES']
 
-# for model in models_list_2deg_HadGEM:
+for model in models_list_2deg_HadGEM:
 
-# 	pr_2deg_file_root="prAdjust_day_"+model+"-EUR-2deg_rcp45_r1i1p1-SMHI-DBS43-EOBS10-1981-2010_"
-
-
-# # Desired periods
-# 	period_2deg_historical='19510101-20051230'
-# 	period_2deg_projection='20060101-21001230'
-
-
-# 	file_pr_2deg_RCM_ref = in_path_RCM_pr_2deg+pr_2deg_file_root+period_2deg_historical+'.nc'
-# 	file_pr_2deg_RCM     = in_path_RCM_pr_2deg+pr_2deg_file_root+period_2deg_projection+'.nc'
-
-# 	print file_pr_2deg_RCM_ref
-# 	print file_pr_2deg_RCM
-
-# 	files_pr_2deg = [file_pr_2deg_RCM_ref,file_pr_2deg_RCM]
-
-
-# # =========================================================================
-# # Processing periods
-
-# # Base period
-# 	base_dt1_HadGEM = datetime.datetime(1981,01,01)
-# 	base_dt2_HadGEM = datetime.datetime(2010,12,30)
-
-# # Analysis period
-# 	dt1_HadGEM = datetime.datetime(2006,01,01)
-# 	dt2_HadGEM = datetime.datetime(2100,12,30)
-# # =========================================================================
-
-
-# # Important!
-# # =========================================================================
-# # Declare which indices you want to calculate using lists
-# 	indice_list_pp = ['RR1'] #R95p
-# # =========================================================================
-
-
-# # =========================================================================
-# # Calculate actual indices: ICCLIM syntax only
-# # =========================================================================
-
-# 	for indice_pp in indice_list_pp:
-# 		print
-# 		print 'Now calculating indice', indice_pp,':'
-# 		print 'Using the model', model
-# 		print
-
-
-# # Build output file name construction phase
-# 		calc_indice_pp = out_path_RCM_pr_2deg+indice_pp+"_"+model+'_pp.nc'
-# 		print 'Going into output file:', calc_indice_pp
-# 		print
-
-	
-# 		icclim.indice(indice_name=indice_pp,
-# 	    	          in_files=files_pr_2deg,
-# 	        	      var_name='prAdjust', 
-#    	           	  #slice_mode='AMJJAS', 
-# 	       	          time_range=[dt1_HadGEM,dt2_HadGEM], 
-#        	          #ignore_Feb29th=True,
-#            	      base_period_time_range=[base_dt1_HadGEM, base_dt2_HadGEM],
-#                	  out_file=calc_indice_pp, 
-#                 	  callback=callback.defaultCallback2)
-
-
-
-
-#=================================================================================================
-# EC Earth model (r12i1pi in file name!)
-
-models_list_2deg_EC_EARTH = ['EC-EARTH']
-
-for model in models_list_2deg_EC_EARTH:
-
-	pr_2deg_file_root="prAdjust_day_"+model+"-EUR-2deg_rcp45_r12i1p1-SMHI-DBS43-EOBS10-1981-2010_"
+	pr_2deg_file_root="prAdjust_day_"+model+"-EUR-2deg_rcp45_r1i1p1-SMHI-DBS43-EOBS10-1981-2010_"
 
 
 # Desired periods
-	period_2deg_historical='19510101-20051231'
-	period_2deg_projection='20060101-21001231'
-# Merged period
-	period_2deg_merged='19510101-21001231'
+	period_2deg_historical='19510101-20051230'
+	period_2deg_projection='20060101-21001230'
 
 
-	file_pr_2deg_RCM_ref        = in_path_RCM_pr_2deg+pr_2deg_file_root+period_2deg_historical+'.nc'
-	file_pr_2deg_RCM            = in_path_RCM_pr_2deg+pr_2deg_file_root+period_2deg_projection+'.nc'
-	file_pr_2deg_RCM_merged     = in_path_RCM_pr_2deg+pr_2deg_file_root+period_2deg_merged+'.nc'
+	file_pr_2deg_RCM_ref = in_path_RCM_pr_2deg+pr_2deg_file_root+period_2deg_historical+'.nc'
+	file_pr_2deg_RCM     = in_path_RCM_pr_2deg+pr_2deg_file_root+period_2deg_projection+'.nc'
 
-	#print file_pr_2deg_RCM_ref
-	#print file_pr_2deg_RCM
-	
-	#files_pr_2deg = [file_pr_2deg_RCM_ref,file_pr_2deg_RCM]
-	files_pr_2deg = [file_pr_2deg_RCM_merged]
+	print file_pr_2deg_RCM_ref
+	print file_pr_2deg_RCM
 
-	print files_pr_2deg
+	files_pr_2deg = [file_pr_2deg_RCM_ref,file_pr_2deg_RCM]
+
 
 # =========================================================================
 # Processing periods
 
 # Base period
-base_dt1 = datetime.datetime(1981,01,01)
-base_dt2 = datetime.datetime(2010,12,31)
+	base_dt1_HadGEM = datetime.datetime(1981,01,01)
+	base_dt2_HadGEM = datetime.datetime(2010,12,30)
 
 # Analysis period
-dt1 = datetime.datetime(2006,01,01)
-dt2 = datetime.datetime(2100,12,31)
+	dt1_HadGEM = datetime.datetime(2006,01,01)
+	dt2_HadGEM = datetime.datetime(2100,12,30)
 # =========================================================================
-
 
 
 # Important!
 # =========================================================================
 # Declare which indices you want to calculate using lists
-
-indice_list_pp = ['R95p'] #R95p,RR1, PRCPTOT,RX1day
-
+	indice_list_pp = ['RR1','RX1day','PRCPTOT','R95p'] #R95p
 # =========================================================================
+
 
 # =========================================================================
 # Calculate actual indices: ICCLIM syntax only
 # =========================================================================
 
-for indice_pp in indice_list_pp:
-	print
-	print 'Now calculating indice', indice_pp,':'
-	print 'Using the model', model
-	print
+	for indice_pp in indice_list_pp:
+		print
+		print 'Now calculating indice', indice_pp,':'
+		print 'Using the model', model
+		print
 
 
 # Build output file name construction phase
-	calc_indice_pp = out_path_RCM_pr_2deg+indice_pp+"_"+model+'_pp.nc'
-	print 'Going into output file:', calc_indice_pp
-	print
+		calc_indice_pp = out_path_RCM_pr_2deg+indice_pp+"_"+model+'_pp.nc'
+		print 'Going into output file:', calc_indice_pp
+		print
 
 	
-	icclim.indice(indice_name=indice_pp,
-    	          in_files=files_pr_2deg,
-        	      var_name='prAdjust', 
-            	  #slice_mode='AMJJAS', 
-    	          time_range=[dt1,dt2], 
-        	      base_period_time_range=[base_dt1, base_dt2],
-            	  out_file=calc_indice_pp, 
-            	  callback=callback.defaultCallback2)
+		icclim.indice(indice_name=indice_pp,
+	    	          in_files=files_pr_2deg,
+	        	      var_name='prAdjust', 
+   	           	  	  #slice_mode='AMJJAS', 
+	       	          time_range=[dt1_HadGEM,dt2_HadGEM], 
+       	              #ignore_Feb29th=True,
+           	          base_period_time_range=[base_dt1_HadGEM, base_dt2_HadGEM],
+               	      out_file=calc_indice_pp, 
+                	  callback=callback.defaultCallback2)
+
+
+#=================================================================================================
+# EC Earth model (r12i1pi in file name!)
+
+# models_list_2deg_EC_EARTH = ['EC-EARTH']
+
+# for model in models_list_2deg_EC_EARTH:
+
+# 	pr_2deg_file_root="prAdjust_day_"+model+"-EUR-2deg_rcp45_r12i1p1-SMHI-DBS43-EOBS10-1981-2010_"
+
+
+# # Desired periods
+# 	period_2deg_historical='19510101-20051231'
+# 	period_2deg_projection='20060101-21001231'
+# # Merged period
+# 	period_2deg_merged='19510101-21001231'
+
+
+# 	file_pr_2deg_RCM_ref        = in_path_RCM_pr_2deg+pr_2deg_file_root+period_2deg_historical+'.nc'
+# 	file_pr_2deg_RCM            = in_path_RCM_pr_2deg+pr_2deg_file_root+period_2deg_projection+'.nc'
+# 	file_pr_2deg_RCM_merged     = in_path_RCM_pr_2deg+pr_2deg_file_root+period_2deg_merged+'.nc'
+
+# 	#print file_pr_2deg_RCM_ref
+# 	#print file_pr_2deg_RCM
+	
+# 	#files_pr_2deg = [file_pr_2deg_RCM_ref,file_pr_2deg_RCM]
+# 	files_pr_2deg = [file_pr_2deg_RCM_merged]
+
+# 	print files_pr_2deg
+
+# # =========================================================================
+# # Processing periods
+
+# # Base period
+# base_dt1 = datetime.datetime(1981,01,01)
+# base_dt2 = datetime.datetime(2010,12,31)
+
+# # Analysis period
+# dt1 = datetime.datetime(2006,01,01)
+# dt2 = datetime.datetime(2100,12,31)
+# # =========================================================================
+
+
+
+# # Important!
+# # =========================================================================
+# # Declare which indices you want to calculate using lists
+
+# indice_list_pp = ['R95p'] #R95p,RR1, PRCPTOT,RX1day
+
+# # =========================================================================
+
+# # =========================================================================
+# # Calculate actual indices: ICCLIM syntax only
+# # =========================================================================
+
+# for indice_pp in indice_list_pp:
+# 	print
+# 	print 'Now calculating indice', indice_pp,':'
+# 	print 'Using the model', model
+# 	print
+
+
+# # Build output file name construction phase
+# 	calc_indice_pp = out_path_RCM_pr_2deg+indice_pp+"_"+model+'_pp.nc'
+# 	print 'Going into output file:', calc_indice_pp
+# 	print
+
+	
+# 	icclim.indice(indice_name=indice_pp,
+#     	          in_files=files_pr_2deg,
+#         	      var_name='prAdjust', 
+#             	  #slice_mode='AMJJAS', 
+#     	          time_range=[dt1,dt2], 
+#         	      base_period_time_range=[base_dt1, base_dt2],
+#             	  out_file=calc_indice_pp, 
+#             	  callback=callback.defaultCallback2)
 
 
 
