@@ -6,7 +6,7 @@
 >>>>>>> 69c45600c5287db998a29916513a25a5b7302cb7
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[cod]
+#*.py[cod]
 *$py.class
 
 # C extensions
