@@ -6,6 +6,4 @@ Upgrade to python codes:
 - up to date with DRS ClipC framework from May 2016 (might need change as updates appear)
 - enabled 360day calendar for HadGEM using module branch 360_day and virtualenv
 - single var routine can now run both bias and non-bias corrected data
-
-To be used further with SMHI model data output.
 =======
