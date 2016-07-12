@@ -170,7 +170,7 @@ out_path_RCM_pr_50km=nobackup+"icclim_indices_v4.2.3/EUR-44/pr/"
 
 
 #=================================================================================================
-# HadGEM mode (period ends iwth yyyy1230!)
+# HadGEM mode (period ends with yyyy1230!)
 
 # models_list_50km_HadGEM = ['MOHC-HadGEM2-ES']
 
@@ -291,8 +291,10 @@ models_list_50km_EC_EARTH = ['ICHEC-EC-EARTH']
 # Important!
 # =========================================================================
 # Declare which indices you want to calculate using lists
-indice_list_pp = ['RR1','RX1day','PRCPTOT','R95p','R10','R20','CWD','CDD']   
-# 'R95p','RX1day','PRCPTOT','RR1','R10','R20','CWD','CDD'
+indice_list_pp = ['R10','R20']   
+# Counting  : 'PRCPTOT','RX1day'
+# Percentile: 'R95p'
+# Threshold : 'RR1','R10','R20','CWD','CDD'
 # =========================================================================
 
 
@@ -376,14 +378,19 @@ for model in models_list_50km_EC_EARTH:
 
 		out_indice_pp = out_path_RCM_pr_50km+\
 		                indice_pp.lower()+\
-		                "_period_"+\
+		                "_icclim-4-2-3"+\
+		                "_SMHI_"+\
+		                model+\
+		                "_r12i1p1_"+\
+		                "SMHI-RCA4_v1_EUR-44_"+\
+		                "SMHI-DBS43-EOBS10-1981-2010_"+\
+		                "yr_"+\
 		                year_dt1+month_dt1+\
 		                day_dt1+\
-		                "_to_"+\
+		                "-"+\
 		                year_dt2+month_dt2+day_dt2+\
-		                "_"+\
-		                model+\
-		                '_pp.nc'
+		                '.nc'
+#"_1971-2000_"+\
 
 		print 'Going into output file:', out_indice_pp
 		print
