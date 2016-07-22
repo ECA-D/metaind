@@ -50,11 +50,11 @@ out_path_RCM_tasmax_50km=nobackup+"icclim_indices_v4.2.3/EUR-44/tasmax/"
 
 
 # # 7/9 models. 2 more below in separate FOR loops.
-# models_list_50km = ['CCCma-CanESM2','CNRM-CERFACS-CNRM-CM5','NCC-NorESM1-M',
-#                    'MPI-M-MPI-ESM-LR','IPSL-IPSL-CM5A-MR','MIROC-MIROC5',
-#                    'NOAA-GFDL-GFDL-ESM2M','CSIRO-QCCCE-CSIRO-Mk3-6-0']
+models_list_50km = ['CCCma-CanESM2','CNRM-CERFACS-CNRM-CM5','NCC-NorESM1-M',
+                   'MPI-M-MPI-ESM-LR','IPSL-IPSL-CM5A-MR','MIROC-MIROC5',
+                   'NOAA-GFDL-GFDL-ESM2M','CSIRO-QCCCE-CSIRO-Mk3-6-0']
 
-models_list_50km = ['CCCma-CanESM2']
+#models_list_50km = ['CCCma-CanESM2']
 	
 # =========================================================================
 # Processing periods
@@ -78,7 +78,7 @@ dt2 = datetime.datetime(yy_dt2,mm_dt2,dd_dt2)
 
 # =========================================================================
 # Declare which indices you want to calculate using lists
-indice_list_pp = ['TX']
+indice_list_pp = ['TX90p']
 # Counting  : 'ID','SU','TX','TX90p'
 # Percentile: 
 # Threshold :
@@ -155,6 +155,7 @@ for model in models_list_50km:
 		                day_dt1+\
 		                "-"+\
 		                year_dt2+month_dt2+day_dt2+\
+		                "_1971-2000"+\
 		                '.nc'
 # #"_historical"+\
 # #"_1971-2000"+\
