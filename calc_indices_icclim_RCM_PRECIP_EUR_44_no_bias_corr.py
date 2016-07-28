@@ -48,12 +48,15 @@ print
 # =====================================================================================================
 # Define some paths
 
+#experiment='rcp45'
+experiment='rcp85'
+
 # RCM output data and output of calculated indices
 nobackup='/nobackup/users/stepanov/'
 
 # Precip (non-bas corrected)
-in_path_RCM_pr_nbc_50km=nobackup+"CLIPC/Model_data/no_bias_corr/EUR-44/rcp45/day/pr/SMHI/all_models/"
-out_path_RCM_pr_nbc_50km=nobackup+"icclim_indices_v4.2.3/EUR-44/rcp45/pr_no_bc/"
+in_path_RCM_pr_nbc_50km=nobackup+"CLIPC/Model_data/no_bias_corr/EUR-44/"+experiment+"/day/pr/SMHI/all_models/"
+out_path_RCM_pr_nbc_50km=nobackup+"icclim_indices_v4.2.3/EUR-44/"+experiment+"/pr_no_bc/"
 
 # Hindcast or projections
 #experiment = 'historical'
@@ -77,11 +80,11 @@ base_dt1 = datetime.datetime(1971,01,01)
 base_dt2 = datetime.datetime(2000,12,31)
 
 # Analysis period 
-yy_dt1=1971
+yy_dt1=2006
 mm_dt1=01
 dd_dt1=01
 #
-yy_dt2=2005
+yy_dt2=2099
 mm_dt2=12
 dd_dt2=31
 #
@@ -93,11 +96,8 @@ dt2 = datetime.datetime(yy_dt2,mm_dt2,dd_dt2)
 # Important!
 # =========================================================================
 # Declare which indices you want to calculate using lists
-indice_list_pp = ['R95p']  
-# Counting  : 'PRCPTOT','RX1day'
-# Percentile: 'R95p'
-# Threshold : 'RR1','CWD','CDD','R10mm','R20mm'
-
+indice_list_pp = ['PRCPTOT','RX1day','RR1','CWD','CDD','R10mm','R20mm','R95p']  
+# Counting  : 'PRCPTOT','RX1day','RR1','CWD','CDD','R10mm','R20mm','R95p'
 #indice_pp = 'RR1'
 # =========================================================================
 
@@ -107,8 +107,7 @@ for model in models_list_50km:
 
 	#  New root for non-bias corrected (!nbc!) files:
 	pr_nbc_file_root_hist = "pr_EUR-44_"+model+"_historical_r1i1p1_SMHI-RCA4_v1_day_"
-	#pr_nbc_file_root_hist = "pr_EUR-44_"+model+"_rcp45_r1i1p1_SMHI-RCA4_v1_day_"
-	pr_nbc_file_root_proj = "pr_EUR-44_"+model+"_rcp45_r1i1p1_SMHI-RCA4_v1_day_"
+	pr_nbc_file_root_proj = "pr_EUR-44_"+model+"_"+experiment+"_r1i1p1_SMHI-RCA4_v1_day_"
 
 
 	# Explicit list
@@ -164,29 +163,63 @@ for model in models_list_50km:
 		month_dt2=str(mm_dt2)
 		day_dt2=str(dd_dt2)
 
-        
+
+        # ----------------------------------------------------------------
+		# Pre-change or rr1 indice into r1m when writing output file:
+		indice_pp_fout=indice_pp
+		print "indice_pp_fout is: ",indice_pp_fout
+
+		if indice_pp == 'RR1':
+    			indice_pp_fout='R1MM' 
+    		else:
+    			indice_pp_fout=indice_pp
+		print "new indice_pp_fout is: ",indice_pp_fout 
+
+		#quit()
+        # ----------------------------------------------------------------
+        # Pre-change of 
+        # model name in output file for models:
+        # indice into r1m when writing output file:
+        #
+        # NCC-NorESM1-M --> NorESM1-M
+        # MIROC-MIROC5 --> MIROC5
+
+		model_fout=model
+		print "input model_fout is: ",model
+
+		if model == 'NCC-NorESM1-M': model_fout='NorESM1-M' 
+    		elif model == 'MIROC-MIROC5': model_fout='MIROC5'
+    		elif model == 'CNRM-CERFACS-CNRM-CM5': model_fout='CNRM-CM5'
+    		elif model == 'MPI-M-MPI-ESM-LR': model_fout='MPI-ESM-LR'
+    		elif model == 'IPSL-IPSL-CM5A-MR': model_fout='IPSL-CM5A-MR'
+    		elif model == 'NOAA-GFDL-GFDL-ESM2M': model_fout='GFDL-ESM2M'
+    		elif model == 'CSIRO-QCCCE-CSIRO-Mk3-6-0': model_fout='CSIRO-Mk3-6-0'
+    		else: model_fout=model
+		print "new model_fout is: ",model_fout 
+
+# 		#quit()
+
+
 		# ====================== NON-BIAS Corrected ====================== #
-       
-		# W/ & W/O base period
+
 		indice_out_name = out_path_RCM_pr_nbc_50km+\
-		                indice_pp.lower()+\
+		                indice_pp_fout.lower()+\
 		                "_icclim-4-2-3"+\
-		                "_SMHI_"+\
-		                model+\
-		                "_historical"+\
-		                "_r12i1p1_"+\
+		                "_KNMI_"+\
+		                model_fout+\
+		                "_rcp85"+\
+		                "_r1i1p1_"+\
 		                "SMHI-RCA4_v1_EUR-44_"+\
 		                "yr_"+\
 		                year_dt1+month_dt1+\
 		                day_dt1+\
 		                "-"+\
 		                year_dt2+month_dt2+day_dt2+\
-		                "_1971-2000"+\
 		                '.nc'
 
 #"_historical"+\
 #"_rcp45"+\
-#"_1971-2000"+\
+#"_rcp85"+\
 
 
 		print 'Going into output file:', indice_out_name
@@ -211,11 +244,8 @@ for model in models_list_50km:
 # # Important!
 # # =========================================================================
 # # Declare which indices you want to calculate using lists
-# indice_list_pp = ['R95p']
-# # Counting  : 'PRCPTOT','RX1day'
-# # Percentile: 'R95p'
-# # Threshold : 'RR1','CWD','CDD','R10mm','R20mm'
-
+# indice_list_pp = ['PRCPTOT','RX1day','RR1','CWD','CDD','R10mm','R20mm','R95p']
+# # Counting  : 'PRCPTOT','RX1day','RR1','CWD','CDD','R10mm','R20mm','R95p'
 # #indice_pp = 'RR1'
 # # =========================================================================
 
@@ -233,7 +263,7 @@ for model in models_list_50km:
 # dd_dt1=01
 # #
 # yy_dt2=2099
-# mm_dt2=11  # 12 for historical, 11 for projections :)
+# mm_dt2=12  # 12 for historical, 11 for projections :)
 # dd_dt2=30
 # #
 # dt1_HadGEM = datetime.datetime(yy_dt1,mm_dt1,dd_dt1)
@@ -249,7 +279,7 @@ for model in models_list_50km:
 
 # 	#  New root for non-bias corrected (!nbc!) files:
 # 	pr_nbc_file_root_hist = "pr_EUR-44_"+model+"_historical_r1i1p1_SMHI-RCA4_v1_day_"
-# 	pr_nbc_file_root_proj = "pr_EUR-44_"+model+"_rcp45_r1i1p1_SMHI-RCA4_v1_day_"
+# 	pr_nbc_file_root_proj = "pr_EUR-44_"+model+"_"+experiment+"_r1i1p1_SMHI-RCA4_v1_day_"
 
 # 	# Explicit list
 # 	files_pr_nbc_50km = [in_path_RCM_pr_nbc_50km+pr_nbc_file_root_hist+"19660101-19701230.nc",
@@ -278,7 +308,7 @@ for model in models_list_50km:
 # 		                 in_path_RCM_pr_nbc_50km+pr_nbc_file_root_proj+"20810101-20851230.nc",
 # 		                 in_path_RCM_pr_nbc_50km+pr_nbc_file_root_proj+"20860101-20901230.nc",
 # 		                 in_path_RCM_pr_nbc_50km+pr_nbc_file_root_proj+"20910101-20951230.nc",
-# 		                 in_path_RCM_pr_nbc_50km+pr_nbc_file_root_proj+"20960101-20991130.nc"]
+# 		                 in_path_RCM_pr_nbc_50km+pr_nbc_file_root_proj+"20960101-20991230.nc"]
 
 # 	print ('All input Model files:', files_pr_nbc_50km)
 
@@ -302,26 +332,51 @@ for model in models_list_50km:
 # 		month_dt2=str(mm_dt2)
 # 		day_dt2=str(dd_dt2)
 
+#         # ----------------------------------------------------------------
+# 		# Pre-change or rr1 indice into r1m when writing output file:
+# 		indice_pp_fout=indice_pp
+# 		print "indice_pp_fout is: ",indice_pp_fout
+
+# 		if indice_pp == 'RR1':
+#     			indice_pp_fout='R1MM' 
+#     		else:
+#     			indice_pp_fout=indice_pp
+# 		print "new indice_pp_fout is: ",indice_pp_fout 
+
+# 		#quit()
+#         # ----------------------------------------------------------------
+#         # Pre-change of 
+#         # model name in output file for models:
+#         # indice into r1m when writing output file:
+#         #
+#         # NCC-NorESM1-M --> NorESM1-M
+#         # MIROC-MIROC5 --> MIROC5
+
+# 		model_fout=model
+# 		print "input model_fout is: ",model
+
+# 		if model == 'NCC-NorESM1-M': model_fout='NorESM1-M' 
+#     		elif model == 'MIROC-MIROC5': model_fout='MIROC5'
+#     		elif model == 'CNRM-CERFACS-CNRM-CM5': model_fout='CNRM-CM5'
+#     		elif model == 'MPI-M-MPI-ESM-LR': model_fout='MPI-ESM-LR'
+#     		elif model == 'IPSL-IPSL-CM5A-MR': model_fout='IPSL-CM5A-MR'
+#     		elif model == 'NOAA-GFDL-GFDL-ESM2M': model_fout='GFDL-ESM2M'
+#     		elif model == 'CSIRO-QCCCE-CSIRO-Mk3-6-0': model_fout='CSIRO-Mk3-6-0'
+#     		else: model_fout=model
+# 		print "new model_fout is: ",model_fout 
+
+# # 		#quit()
+
 
 # #Build output file name construction phase
-
-# 		# ======================== BIAS Corrected ======================== #
-#         # W/ base period
-# 		#indice_out_name = out_path_RCM_pr_nbc_50km+indice_pp+"_icclim_KNMI_"+model+"_rcp45_r1i1p1_SMHI-RCA4_v1-SMHI-DBS43-EOBS10-1981-2010_EUR-44_day_"+year_dt1+month_dt1+day_dt1+"_to_"+year_dt2+month_dt2+day_dt2+"_"+model+"_1981-2010"'.nc'  # new DRS guideline 23.05.2016.
-# 		# W/O base period
-# 		#indice_out_name = out_path_RCM_pr_nbc_50km+indice_pp+"_icclim_KNMI_"+model+"_rcp45_r1i1p1_SMHI-RCA4_v1-SMHI-DBS43-EOBS10-1981-2010_EUR-44_day_"+year_dt1+month_dt1+day_dt1+"_to_"+year_dt2+month_dt2+day_dt2+"_na.nc"                     # new DRS guideline 23.05.2016.
-# 		#print 'Going into output file:', indice_out_name
-# 		#print
-
-        
 # 		# ====================== NON-BIAS Corrected ====================== #
-# 		# W/ or W/O base period
+
 # 		indice_out_name = out_path_RCM_pr_nbc_50km+\
-# 		                indice_pp.lower()+\
+# 		                indice_pp_fout.lower()+\
 # 		                "_icclim-4-2-3"+\
-# 		                "_SMHI_"+\
-# 		                model+\
-# 		                "_rcp45"+\
+# 		                "_KNMI_"+\
+# 		                model[5:15]+\
+# 		                "_rcp85"+\
 # 		                "_r1i1p1_"+\
 # 		                "SMHI-RCA4_v1_EUR-44_"+\
 # 		                "yr_"+\
@@ -329,12 +384,11 @@ for model in models_list_50km:
 # 		                day_dt1+\
 # 		                "-"+\
 # 		                year_dt2+month_dt2+day_dt2+\
-# 		                "_1971-2000"+\
 # 		                '.nc'
 
 # #"_historical"+\
 # # #"_rcp45"+\
-# #"_1971-2000"+\
+# # #"_rcp85"+\
 
 # 		print 'Going into output file:', indice_out_name
 # 		print
@@ -358,11 +412,8 @@ for model in models_list_50km:
 # # Important!
 # # =========================================================================
 # # Declare which indices you want to calculate using lists
-# indice_list_pp = ['R95p']   
-# # Counting  : 'PRCPTOT','RX1day'
-# # Percentile: 'R95p'
-# # Threshold : 'RR1','CWD','CDD','R10mm','R20mm'
-
+# indice_list_pp = ['PRCPTOT','RX1day','RR1','CWD','CDD','R10mm','R20mm','R95p']   
+# # Counting  : 'PRCPTOT','RX1day','RR1','CWD','CDD','R10mm','R20mm','R95p'
 # #indice_pp = 'RR1'
 # # =========================================================================
 
@@ -392,7 +443,7 @@ for model in models_list_50km:
 
 # 	#  New root for non-bias corrected (!nbc!) files:
 # 	pr_nbc_file_root_hist = "pr_EUR-44_"+model+"_historical_r12i1p1_SMHI-RCA4_v1_day_"
-# 	pr_nbc_file_root_proj = "pr_EUR-44_"+model+"_rcp45_r12i1p1_SMHI-RCA4_v1_day_"
+# 	pr_nbc_file_root_proj = "pr_EUR-44_"+model+"_"+experiment+"_r12i1p1_SMHI-RCA4_v1_day_"
 
 # 	# Explicit list
 # 	files_pr_nbc_50km = [in_path_RCM_pr_nbc_50km+pr_nbc_file_root_hist+"19660101-19701231.nc",
@@ -446,14 +497,50 @@ for model in models_list_50km:
 # 		day_dt2=str(dd_dt2)
 
         
+#         # ----------------------------------------------------------------
+# 		# Pre-change or rr1 indice into r1m when writing output file:
+# 		indice_pp_fout=indice_pp
+# 		print "indice_pp_fout is: ",indice_pp_fout
+
+# 		if indice_pp == 'RR1':
+#     			indice_pp_fout='R1MM' 
+#     		else:
+#     			indice_pp_fout=indice_pp
+# 		print "new indice_pp_fout is: ",indice_pp_fout 
+
+# 		#quit()
+#         # ----------------------------------------------------------------
+#         # Pre-change of 
+#         # model name in output file for models:
+#         # indice into r1m when writing output file:
+#         #
+#         # NCC-NorESM1-M --> NorESM1-M
+#         # MIROC-MIROC5 --> MIROC5
+
+# 		model_fout=model
+# 		print "input model_fout is: ",model
+
+# 		if model == 'NCC-NorESM1-M': model_fout='NorESM1-M' 
+#     		elif model == 'MIROC-MIROC5': model_fout='MIROC5'
+#     		elif model == 'CNRM-CERFACS-CNRM-CM5': model_fout='CNRM-CM5'
+#     		elif model == 'MPI-M-MPI-ESM-LR': model_fout='MPI-ESM-LR'
+#     		elif model == 'IPSL-IPSL-CM5A-MR': model_fout='IPSL-CM5A-MR'
+#     		elif model == 'NOAA-GFDL-GFDL-ESM2M': model_fout='GFDL-ESM2M'
+#     		elif model == 'CSIRO-QCCCE-CSIRO-Mk3-6-0': model_fout='CSIRO-Mk3-6-0'
+#     		else: model_fout=model
+# 		print "new model_fout is: ",model_fout 
+
+# # 		#quit()
+
+
 # 		# ====================== NON-BIAS Corrected ====================== #
 # 		# W/ & W/O base period
 # 		indice_out_name = out_path_RCM_pr_nbc_50km+\
-# 		                indice_pp.lower()+\
+# 		                indice_pp_fout.lower()+\
 # 		                "_icclim-4-2-3"+\
-# 		                "_SMHI_"+\
-# 		                model+\
-# 		                "_rcp45"+\
+# 		                "_KNMI_"+\
+# 		                model[6:14]+\
+# 		                "_rcp85"+\
 # 		                "_r12i1p1_"+\
 # 		                "SMHI-RCA4_v1_EUR-44_"+\
 # 		                "yr_"+\
@@ -461,12 +548,11 @@ for model in models_list_50km:
 # 		                day_dt1+\
 # 		                "-"+\
 # 		                year_dt2+month_dt2+day_dt2+\
-# 		                "_1971-2000"+\
 # 		                '.nc'
 
 # #"_historical"+\
 # # #"_rcp45"+\
-# #"_1971-2000"+\
+# # #"_rcp85"+\
 
 
 # 		print 'Going into output file:', indice_out_name
