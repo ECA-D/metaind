@@ -39,8 +39,8 @@ import icclim.util.callback as callback
 # =====================================================================================================
 # Define some paths and define experiment
 
-#experiment='rcp45'
-experiment='rcp85'
+experiment='rcp45'
+#experiment='rcp85'
 
 # RCM output data and output of calculated indices: All to no /nobackup, local
 nobackup='/nobackup/users/stepanov/'
@@ -54,160 +54,160 @@ out_path_RCM_tas_50km=nobackup+"icclim_indices_v4.2.3/EUR-44/"+experiment+"/tas/
 
 # Every RCM output file has predictable root name (specific to resolution!)
 # ==> Construct data file names
-# models_list_50km = ['CCCma-CanESM2','CNRM-CERFACS-CNRM-CM5','NCC-NorESM1-M',
-#                    'MPI-M-MPI-ESM-LR','IPSL-IPSL-CM5A-MR','MIROC-MIROC5',
-#                    'NOAA-GFDL-GFDL-ESM2M','CSIRO-QCCCE-CSIRO-Mk3-6-0']
+models_list_50km = ['CCCma-CanESM2','CNRM-CERFACS-CNRM-CM5','NCC-NorESM1-M',
+                   'MPI-M-MPI-ESM-LR','IPSL-IPSL-CM5A-MR','MIROC-MIROC5',
+                   'NOAA-GFDL-GFDL-ESM2M','CSIRO-QCCCE-CSIRO-Mk3-6-0']
 
-# #models_list_50km = ['MIROC-MIROC5']
-# # =========================================================================
-# # Processing periods
+#models_list_50km = ['MIROC-MIROC5']
+# =========================================================================
+# Processing periods
 
-# # Base period
-# base_dt1 = datetime.datetime(1971,01,01)
-# base_dt2 = datetime.datetime(2000,12,31)
+# Base period
+base_dt1 = datetime.datetime(1971,01,01)
+base_dt2 = datetime.datetime(2000,12,31)
 
-# # Analysis period
-# yy_dt1=1970
-# mm_dt1=01
-# dd_dt1=01
-# #
-# yy_dt2=2005
-# mm_dt2=12
-# dd_dt2=31
-# #
-# dt1 = datetime.datetime(yy_dt1,mm_dt1,dd_dt1)
-# dt2 = datetime.datetime(yy_dt2,mm_dt2,dd_dt2)
-# # =========================================================================
+# Analysis period
+yy_dt1=2006
+mm_dt1=01
+dd_dt1=01
+#
+yy_dt2=2099
+mm_dt2=12
+dd_dt2=31
+#
+dt1 = datetime.datetime(yy_dt1,mm_dt1,dd_dt1)
+dt2 = datetime.datetime(yy_dt2,mm_dt2,dd_dt2)
+# =========================================================================
 
-# # =========================================================================
-# # Indices you want to calculate using lists
-# indice_list_pp = ['HD17']
-# # Counting  : 'HD17'
-# #indice_pp = 
-# # =========================================================================
+# =========================================================================
+# Indices you want to calculate using lists
+indice_list_pp = ['HD17']
+# Counting  : 'HD17'
+#indice_pp = 
+# =========================================================================
 
-# for model in models_list_50km:
+for model in models_list_50km:
 
-# 	tas_50km_file_root="tasAdjust_EUR-44_"+\
-# 	                      model+"_"+experiment+\
-# 	                      "_r1i1p1_SMHI-RCA4_v1-SMHI-DBS43-EOBS10-1981-2010_day_"
+	tas_50km_file_root="tasAdjust_EUR-44_"+\
+	                      model+"_"+experiment+\
+	                      "_r1i1p1_SMHI-RCA4_v1-SMHI-DBS43-EOBS10-1981-2010_day_"
 
-# 	files_tas_50km = [in_path_RCM_tas_50km+tas_50km_file_root+"19660101-19701231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"19710101-19751231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"19760101-19801231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"19810101-19851231.nc",
-# 						 in_path_RCM_tas_50km+tas_50km_file_root+"19860101-19901231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"19910101-19951231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"19960101-20001231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"20010101-20051231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"20060101-20101231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"20110101-20151231.nc",
-# 			             in_path_RCM_tas_50km+tas_50km_file_root+"20160101-20201231.nc",
-# 			             in_path_RCM_tas_50km+tas_50km_file_root+"20210101-20251231.nc",
-# 		 	             in_path_RCM_tas_50km+tas_50km_file_root+"20260101-20301231.nc",
-# 			             in_path_RCM_tas_50km+tas_50km_file_root+"20310101-20351231.nc",
-# 			             in_path_RCM_tas_50km+tas_50km_file_root+"20360101-20401231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"20410101-20451231.nc",
-# 			             in_path_RCM_tas_50km+tas_50km_file_root+"20460101-20501231.nc",
-# 			             in_path_RCM_tas_50km+tas_50km_file_root+"20510101-20551231.nc",
-# 			             in_path_RCM_tas_50km+tas_50km_file_root+"20560101-20601231.nc",
-# 			             in_path_RCM_tas_50km+tas_50km_file_root+"20610101-20651231.nc",
-# 			             in_path_RCM_tas_50km+tas_50km_file_root+"20660101-20701231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"20710101-20751231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"20760101-20801231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"20810101-20851231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"20860101-20901231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"20910101-20951231.nc",
-# 		                 in_path_RCM_tas_50km+tas_50km_file_root+"20960101-21001231.nc"]
+	files_tas_50km = [in_path_RCM_tas_50km+tas_50km_file_root+"19660101-19701231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"19710101-19751231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"19760101-19801231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"19810101-19851231.nc",
+						 in_path_RCM_tas_50km+tas_50km_file_root+"19860101-19901231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"19910101-19951231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"19960101-20001231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"20010101-20051231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"20060101-20101231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"20110101-20151231.nc",
+			             in_path_RCM_tas_50km+tas_50km_file_root+"20160101-20201231.nc",
+			             in_path_RCM_tas_50km+tas_50km_file_root+"20210101-20251231.nc",
+		 	             in_path_RCM_tas_50km+tas_50km_file_root+"20260101-20301231.nc",
+			             in_path_RCM_tas_50km+tas_50km_file_root+"20310101-20351231.nc",
+			             in_path_RCM_tas_50km+tas_50km_file_root+"20360101-20401231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"20410101-20451231.nc",
+			             in_path_RCM_tas_50km+tas_50km_file_root+"20460101-20501231.nc",
+			             in_path_RCM_tas_50km+tas_50km_file_root+"20510101-20551231.nc",
+			             in_path_RCM_tas_50km+tas_50km_file_root+"20560101-20601231.nc",
+			             in_path_RCM_tas_50km+tas_50km_file_root+"20610101-20651231.nc",
+			             in_path_RCM_tas_50km+tas_50km_file_root+"20660101-20701231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"20710101-20751231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"20760101-20801231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"20810101-20851231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"20860101-20901231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"20910101-20951231.nc",
+		                 in_path_RCM_tas_50km+tas_50km_file_root+"20960101-21001231.nc"]
 
-# 	print 'All input Model files:', files_tas_50km
+	print 'All input Model files:', files_tas_50km
 
-# # =========================================================================
-# # Calculate actual indices: ICCLIM syntax only
-# # =========================================================================
+# =========================================================================
+# Calculate actual indices: ICCLIM syntax only
+# =========================================================================
 
-# 	for indice_pp in indice_list_pp:
-# 		print
-# 		print 'Now calculating indice', indice_pp,':'
-# 		print 'Using the model', model
-# 		print
+	for indice_pp in indice_list_pp:
+		print
+		print 'Now calculating indice', indice_pp,':'
+		print 'Using the model', model
+		print
 
-# 		# Build output file name construction phase
-# 		year_dt1=str(yy_dt1)
-# 		month_dt1=str(mm_dt1).zfill(2)
-# 		day_dt1=str(dd_dt1).zfill(2)
-# 		# end
-# 		year_dt2=str(yy_dt2)
-# 		month_dt2=str(mm_dt2)
-# 		day_dt2=str(dd_dt2)
+		# Build output file name construction phase
+		year_dt1=str(yy_dt1)
+		month_dt1=str(mm_dt1).zfill(2)
+		day_dt1=str(dd_dt1).zfill(2)
+		# end
+		year_dt2=str(yy_dt2)
+		month_dt2=str(mm_dt2)
+		day_dt2=str(dd_dt2)
 
-# 		# ----------------------------------------------------------------
-# 		# Pre-change or rr1 indice into r1m when writing output file:
-# 		indice_pp_fout=indice_pp
-# 		print "indice_pp_fout is: ",indice_pp_fout
+		# ----------------------------------------------------------------
+		# Pre-change or rr1 indice into r1m when writing output file:
+		indice_pp_fout=indice_pp
+		print "indice_pp_fout is: ",indice_pp_fout
 
-# 		if indice_pp == 'RR1':
-#     			indice_pp_fout='R1MM' 
-#     		else:
-#     			indice_pp_fout=indice_pp
-# 		print "new indice_pp_fout is: ",indice_pp_fout 
+		if indice_pp == 'RR1':
+    			indice_pp_fout='R1MM' 
+    		else:
+    			indice_pp_fout=indice_pp
+		print "new indice_pp_fout is: ",indice_pp_fout 
 
-# 		#quit()
-#         # ----------------------------------------------------------------
+		#quit()
+        # ----------------------------------------------------------------
 
-#         # Pre-change of 
-#         # model name in output file for models:
-#         # indice into r1m when writing output file:
-#         #
-#         # NCC-NorESM1-M --> NorESM1-M
-#         # MIROC-MIROC5 --> MIROC5
+        # Pre-change of 
+        # model name in output file for models:
+        # indice into r1m when writing output file:
+        #
+        # NCC-NorESM1-M --> NorESM1-M
+        # MIROC-MIROC5 --> MIROC5
 
-# 		model_fout=model
-# 		print "input model_fout is: ",model
+		model_fout=model
+		print "input model_fout is: ",model
 
-# 		if model == 'NCC-NorESM1-M': model_fout='NorESM1-M' 
-#     		elif model == 'MIROC-MIROC5': model_fout='MIROC5'
-#     		elif model == 'CNRM-CERFACS-CNRM-CM5': model_fout='CNRM-CM5'
-#     		elif model == 'MPI-M-MPI-ESM-LR': model_fout='MPI-ESM-LR'
-#     		elif model == 'IPSL-IPSL-CM5A-MR': model_fout='IPSL-CM5A-MR'
-#     		elif model == 'NOAA-GFDL-GFDL-ESM2M': model_fout='GFDL-ESM2M'
-#     		elif model == 'CSIRO-QCCCE-CSIRO-Mk3-6-0': model_fout='CSIRO-Mk3-6-0'
-#     		else: model_fout=model
-# 		print "new model_fout is: ",model_fout 
+		if model == 'NCC-NorESM1-M': model_fout='NorESM1-M' 
+    		elif model == 'MIROC-MIROC5': model_fout='MIROC5'
+    		elif model == 'CNRM-CERFACS-CNRM-CM5': model_fout='CNRM-CM5'
+    		elif model == 'MPI-M-MPI-ESM-LR': model_fout='MPI-ESM-LR'
+    		elif model == 'IPSL-IPSL-CM5A-MR': model_fout='IPSL-CM5A-MR'
+    		elif model == 'NOAA-GFDL-GFDL-ESM2M': model_fout='GFDL-ESM2M'
+    		elif model == 'CSIRO-QCCCE-CSIRO-Mk3-6-0': model_fout='CSIRO-Mk3-6-0'
+    		else: model_fout=model
+		print "new model_fout is: ",model_fout 
 
-# 		#quit()
-#         # ----------------------------------------------------------------
+		#quit()
+        # ----------------------------------------------------------------
 
-# 		out_indice_pp = out_path_RCM_tas_50km+\
-# 						indice_pp_fout.lower()+\
-# 		                "_icclim-4-2-3"+\
-# 		                "_KNMI_"+\
-# 		                model_fout+\
-# 		                "_historical"+\
-# 		                "_r1i1p1_"+\
-# 		                "SMHI-RCA4_v1_EUR-44_"+\
-# 		                "SMHI-DBS43_EOBS10_bcref-1981-2010_"+\
-# 		                "yr_"+\
-# 		                year_dt1+month_dt1+\
-# 		                day_dt1+\
-# 		                "-"+\
-# 		                year_dt2+month_dt2+day_dt2+\
-# 		                '.nc'
-# # #"_historical"+\
-# # #"_rcp45"+\
-# # #"_rcp85"+\
+		out_indice_pp = out_path_RCM_tas_50km+\
+						indice_pp_fout.lower()+\
+		                "_icclim-4-2-3"+\
+		                "_KNMI_"+\
+		                model_fout+\
+		                "_rcp45"+\
+		                "_r1i1p1_"+\
+		                "SMHI-RCA4_v1_EUR-44_"+\
+		                "SMHI-DBS43_EOBS10_bcref-1981-2010_"+\
+		                "yr_"+\
+		                year_dt1+month_dt1+\
+		                day_dt1+\
+		                "-"+\
+		                year_dt2+month_dt2+day_dt2+\
+		                '.nc'
+# #"_historical"+\
+# #"_rcp45"+\
+# #"_rcp85"+\
 
-# 		print 'Going into output file:', out_indice_pp
-# 		print
+		print 'Going into output file:', out_indice_pp
+		print
 		
-# 		icclim.indice(indice_name=indice_pp,
-# 		    	      in_files=files_tas_50km,
-# 		        	  var_name='tasAdjust', 
-# 	               	  slice_mode='year', 
-# 	        	      time_range=[dt1,dt2], 
-# 	           	      base_period_time_range=[base_dt1, base_dt2],
-# 	               	  out_file=out_indice_pp, 
-# 	                  callback=callback.defaultCallback2)
+		icclim.indice(indice_name=indice_pp,
+		    	      in_files=files_tas_50km,
+		        	  var_name='tasAdjust', 
+	               	  slice_mode='year', 
+	        	      time_range=[dt1,dt2], 
+	           	      base_period_time_range=[base_dt1, base_dt2],
+	               	  out_file=out_indice_pp, 
+	                  callback=callback.defaultCallback2)
 
 
 #=================================================================================================
@@ -229,11 +229,11 @@ out_path_RCM_tas_50km=nobackup+"icclim_indices_v4.2.3/EUR-44/"+experiment+"/tas/
 # base_dt2_HadGEM = datetime.datetime(2000,12,30)
 
 # # Analysis period
-# yy_dt1=2006
+# yy_dt1=1970
 # mm_dt1=01
 # dd_dt1=01
 # #
-# yy_dt2=2099
+# yy_dt2=2005
 # mm_dt2=12
 # dd_dt2=30
 # #
@@ -277,7 +277,7 @@ out_path_RCM_tas_50km=nobackup+"icclim_indices_v4.2.3/EUR-44/"+experiment+"/tas/
 # 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20810101-20851230.nc",
 # 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20860101-20901230.nc",
 # 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20910101-20951230.nc",
-# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20960101-20991230.nc"]
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20960101-20991130.nc"] # 20991130 for rcp45
 
 # 	print ('All input Model files:', files_tas_50km)
 
@@ -319,7 +319,7 @@ out_path_RCM_tas_50km=nobackup+"icclim_indices_v4.2.3/EUR-44/"+experiment+"/tas/
 # 		                "_icclim-4-2-3"+\
 # 		                "_KNMI_"+\
 # 		                model[5:15]+\
-# 		                "_rcp85"+\
+# 		                "_historical"+\
 # 		                "_r1i1p1_"+\
 # 		                "SMHI-RCA4_v1_EUR-44_"+\
 # 		                "SMHI-DBS43_EOBS10_bcref-1981-2010_"+\
@@ -351,140 +351,140 @@ out_path_RCM_tas_50km=nobackup+"icclim_indices_v4.2.3/EUR-44/"+experiment+"/tas/
 
 #=================================================================================================
 # EC Earth model (r12i1pi in file name!)
-models_list_50km_EC_EARTH = ['ICHEC-EC-EARTH']
-# =========================================================================
+# models_list_50km_EC_EARTH = ['ICHEC-EC-EARTH']
+# # =========================================================================
 
-# =========================================================================
-# Indices you want to calculate using lists
-indice_list_pp = ['HD17']   
-# Indices : 'HD17'
-# =========================================================================
-
-
-# =========================================================================
-# Processing periods
-
-# Base period
-base_dt1 = datetime.datetime(1971,01,01)
-base_dt2 = datetime.datetime(2000,12,31)
-
-# Analysis period [1970-2005] historical, [2006-2099] projections
-yy_dt1=1970
-mm_dt1=01
-dd_dt1=01
-#
-yy_dt2=2005
-mm_dt2=12
-dd_dt2=31
-#
-dt1 = datetime.datetime(yy_dt1,mm_dt1,dd_dt1)
-dt2 = datetime.datetime(yy_dt2,mm_dt2,dd_dt2)
-# =========================================================================
+# # =========================================================================
+# # Indices you want to calculate using lists
+# indice_list_pp = ['HD17']   
+# # Indices : 'HD17'
+# # =========================================================================
 
 
-for model in models_list_50km_EC_EARTH:
+# # =========================================================================
+# # Processing periods
 
-	tas_50km_file_root="tasAdjust_EUR-44_"+\
-	                       model+"_"+experiment+\
-	                       "_r12i1p1_SMHI-RCA4_v1-SMHI-DBS43-EOBS10-1981-2010_day_"
+# # Base period
+# base_dt1 = datetime.datetime(1971,01,01)
+# base_dt2 = datetime.datetime(2000,12,31)
 
-	# Explicit list
-	files_tas_50km = [in_path_RCM_tas_50km+tas_50km_file_root+"19660101-19701231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"19710101-19751231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"19760101-19801231.nc",
-                     in_path_RCM_tas_50km+tas_50km_file_root+"19810101-19851231.nc",
-					 in_path_RCM_tas_50km+tas_50km_file_root+"19860101-19901231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"19910101-19951231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"19960101-20001231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"20010101-20051231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"20060101-20101231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"20110101-20151231.nc",
-		             in_path_RCM_tas_50km+tas_50km_file_root+"20160101-20201231.nc",
-		             in_path_RCM_tas_50km+tas_50km_file_root+"20210101-20251231.nc",
-	 	             in_path_RCM_tas_50km+tas_50km_file_root+"20260101-20301231.nc",
-		             in_path_RCM_tas_50km+tas_50km_file_root+"20310101-20351231.nc",
-		             in_path_RCM_tas_50km+tas_50km_file_root+"20360101-20401231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"20410101-20451231.nc",
-		             in_path_RCM_tas_50km+tas_50km_file_root+"20460101-20501231.nc",
-		             in_path_RCM_tas_50km+tas_50km_file_root+"20510101-20551231.nc",
-		             in_path_RCM_tas_50km+tas_50km_file_root+"20560101-20601231.nc",
-		             in_path_RCM_tas_50km+tas_50km_file_root+"20610101-20651231.nc",
-		             in_path_RCM_tas_50km+tas_50km_file_root+"20660101-20701231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"20710101-20751231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"20760101-20801231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"20810101-20851231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"20860101-20901231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"20910101-20951231.nc",
-	                 in_path_RCM_tas_50km+tas_50km_file_root+"20960101-21001231.nc"]
-
-	print 'All input Model files:', files_tas_50km
+# # Analysis period [1970-2005] historical, [2006-2099] projections
+# yy_dt1=2006
+# mm_dt1=01
+# dd_dt1=01
+# #
+# yy_dt2=2099
+# mm_dt2=12
+# dd_dt2=31
+# #
+# dt1 = datetime.datetime(yy_dt1,mm_dt1,dd_dt1)
+# dt2 = datetime.datetime(yy_dt2,mm_dt2,dd_dt2)
+# # =========================================================================
 
 
-# =========================================================================
-# Calculate actual indices: ICCLIM syntax only
-# =========================================================================
+# for model in models_list_50km_EC_EARTH:
 
-	for indice_pp in indice_list_pp:
-		print
-		print 'Now calculating indice', indice_pp,':'
-		print 'Using the model', model
-		print
+# 	tas_50km_file_root="tasAdjust_EUR-44_"+\
+# 	                       model+"_"+experiment+\
+# 	                       "_r12i1p1_SMHI-RCA4_v1-SMHI-DBS43-EOBS10-1981-2010_day_"
 
-		#Build output file name. First the period.
-		year_dt1=str(yy_dt1)
-		month_dt1=str(mm_dt1).zfill(2)
-		day_dt1=str(dd_dt1).zfill(2)
-		# end
-		year_dt2=str(yy_dt2)
-		month_dt2=str(mm_dt2)
-		day_dt2=str(dd_dt2)
+# 	# Explicit list
+# 	files_tas_50km = [in_path_RCM_tas_50km+tas_50km_file_root+"19660101-19701231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"19710101-19751231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"19760101-19801231.nc",
+#                      in_path_RCM_tas_50km+tas_50km_file_root+"19810101-19851231.nc",
+# 					 in_path_RCM_tas_50km+tas_50km_file_root+"19860101-19901231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"19910101-19951231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"19960101-20001231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20010101-20051231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20060101-20101231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20110101-20151231.nc",
+# 		             in_path_RCM_tas_50km+tas_50km_file_root+"20160101-20201231.nc",
+# 		             in_path_RCM_tas_50km+tas_50km_file_root+"20210101-20251231.nc",
+# 	 	             in_path_RCM_tas_50km+tas_50km_file_root+"20260101-20301231.nc",
+# 		             in_path_RCM_tas_50km+tas_50km_file_root+"20310101-20351231.nc",
+# 		             in_path_RCM_tas_50km+tas_50km_file_root+"20360101-20401231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20410101-20451231.nc",
+# 		             in_path_RCM_tas_50km+tas_50km_file_root+"20460101-20501231.nc",
+# 		             in_path_RCM_tas_50km+tas_50km_file_root+"20510101-20551231.nc",
+# 		             in_path_RCM_tas_50km+tas_50km_file_root+"20560101-20601231.nc",
+# 		             in_path_RCM_tas_50km+tas_50km_file_root+"20610101-20651231.nc",
+# 		             in_path_RCM_tas_50km+tas_50km_file_root+"20660101-20701231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20710101-20751231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20760101-20801231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20810101-20851231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20860101-20901231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20910101-20951231.nc",
+# 	                 in_path_RCM_tas_50km+tas_50km_file_root+"20960101-21001231.nc"]
 
-        # ----------------------------------------------------------------
-		# Pre-change or rr1 indice into r1m when writing output file:
-		indice_pp_fout=indice_pp
-		print "indice_pp_fout is: ",indice_pp_fout
+# 	print 'All input Model files:', files_tas_50km
 
-		if indice_pp == 'RR1':
-    			indice_pp_fout='R1MM' 
-    		else:
-    			indice_pp_fout=indice_pp
-		print "new indice_pp_fout is: ",indice_pp_fout 
 
-		#quit()
-        # ----------------------------------------------------------------
+# # =========================================================================
+# # Calculate actual indices: ICCLIM syntax only
+# # =========================================================================
 
-		out_indice_pp = out_path_RCM_tas_50km+\
-		                indice_pp_fout.lower()+\
-		                "_icclim-4-2-3"+\
-		                "_KNMI_"+\
-		                model[6:14]+\
-		                "_historical"+\
-		                "_r12i1p1_"+\
-		                "SMHI-RCA4_v1_EUR-44_"+\
-		                "SMHI-DBS43_EOBS10_bcref-1981-2010_"+\
-		                "yr_"+\
-		                year_dt1+month_dt1+\
-		                day_dt1+\
-		                "-"+\
-		                year_dt2+month_dt2+day_dt2+\
-		                '.nc'
-#"_historical"+\
-#"_rcp45"+\
-#"_rcp85"+\
+# 	for indice_pp in indice_list_pp:
+# 		print
+# 		print 'Now calculating indice', indice_pp,':'
+# 		print 'Using the model', model
+# 		print
 
-		print 'Going into output file:', out_indice_pp
-		print
+# 		#Build output file name. First the period.
+# 		year_dt1=str(yy_dt1)
+# 		month_dt1=str(mm_dt1).zfill(2)
+# 		day_dt1=str(dd_dt1).zfill(2)
+# 		# end
+# 		year_dt2=str(yy_dt2)
+# 		month_dt2=str(mm_dt2)
+# 		day_dt2=str(dd_dt2)
 
-		# =========================================================================
+#         # ----------------------------------------------------------------
+# 		# Pre-change or rr1 indice into r1m when writing output file:
+# 		indice_pp_fout=indice_pp
+# 		print "indice_pp_fout is: ",indice_pp_fout
+
+# 		if indice_pp == 'RR1':
+#     			indice_pp_fout='R1MM' 
+#     		else:
+#     			indice_pp_fout=indice_pp
+# 		print "new indice_pp_fout is: ",indice_pp_fout 
+
+# 		#quit()
+#         # ----------------------------------------------------------------
+
+# 		out_indice_pp = out_path_RCM_tas_50km+\
+# 		                indice_pp_fout.lower()+\
+# 		                "_icclim-4-2-3"+\
+# 		                "_KNMI_"+\
+# 		                model[6:14]+\
+# 		                "_rcp45"+\
+# 		                "_r12i1p1_"+\
+# 		                "SMHI-RCA4_v1_EUR-44_"+\
+# 		                "SMHI-DBS43_EOBS10_bcref-1981-2010_"+\
+# 		                "yr_"+\
+# 		                year_dt1+month_dt1+\
+# 		                day_dt1+\
+# 		                "-"+\
+# 		                year_dt2+month_dt2+day_dt2+\
+# 		                '.nc'
+# #"_historical"+\
+# #"_rcp45"+\
+# #"_rcp85"+\
+
+# 		print 'Going into output file:', out_indice_pp
+# 		print
+
+# 		# =========================================================================
 	
-		icclim.indice(indice_name=indice_pp,
-	    	          in_files=files_tas_50km,
-	        	      var_name='tasAdjust', 
-               	 	  slice_mode='year',
-        	          time_range=[dt1,dt2], 
-           	      	  base_period_time_range=[base_dt1, base_dt2],
-               	  	  out_file=out_indice_pp, 
-                	  callback=callback.defaultCallback2)
+# 		icclim.indice(indice_name=indice_pp,
+# 	    	          in_files=files_tas_50km,
+# 	        	      var_name='tasAdjust', 
+#                	 	  slice_mode='year',
+#         	          time_range=[dt1,dt2], 
+#            	      	  base_period_time_range=[base_dt1, base_dt2],
+#                	  	  out_file=out_indice_pp, 
+#                 	  callback=callback.defaultCallback2)
 
 
 print
