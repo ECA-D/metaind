@@ -2,6 +2,14 @@
 # Big files
 *.nc
 
+# icclim left over files
+ctypes
+datetime
+icclim
+
+# Parallel testing enviroment to run Tx90p on ECMWF cluster
+parallel
+
 =======
 >>>>>>> 69c45600c5287db998a29916513a25a5b7302cb7
 # Byte-compiled / optimized / DLL files
