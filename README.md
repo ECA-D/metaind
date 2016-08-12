@@ -1,4 +1,4 @@
-Routine to calculate icclim [CLIPC] indices using the icclim python module.
+Routine to calculate icclim [CLIP-C] indices using the icclim python module for EUR-44 domain.
 ==
 - includes both bias corrected and non-bias corrected RCM data
 - up to date with DRS ClipC metadata compliance v1.3 - July 2016

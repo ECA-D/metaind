@@ -2,10 +2,14 @@
 # Big files
 *.nc
 
+# Hiden files
+.travis.yml
+
 # icclim left over files
-ctypes
-datetime
-icclim
+/ctypes
+/datetime
+/icclim
+/netCDF4
 
 # Parallel testing enviroment to run Tx90p on ECMWF cluster
 parallel/
