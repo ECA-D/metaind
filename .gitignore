@@ -8,7 +8,7 @@ datetime
 icclim
 
 # Parallel testing enviroment to run Tx90p on ECMWF cluster
-parallel
+parallel/
 
 =======
 >>>>>>> 69c45600c5287db998a29916513a25a5b7302cb7
