@@ -14,7 +14,7 @@ RMC bias corrected files used as input are provided by http://exporter.nsc.liu.s
 
 Non-bias corrected files are on http://esgf.llnl.gov/
 
-Step by step procedure of RCM variable tasmax/tasmaxAdjust (example)
+Step by step procedure of RCM variable tasmax (example for non-bias corrected)
 --
 - producing climate extreme indices ID (icing days), SU (summer days) and TX (mean of daily maximum temperature):
 
