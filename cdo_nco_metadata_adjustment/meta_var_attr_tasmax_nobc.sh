@@ -1,16 +1,16 @@
 #!/bin/bash
 #
 #==========================================================================================================================================
-# correct variable attributes for tasmax indices
+# correct variable attributes for tasmax NoBC indices
 #==========================================================================================================================================
 #
 #C.Photiadou 2016/07/25
 # Directories
 #dir_in='/nobackup/users/photiado/example_clipc_metadata/'
-indir='tasmax' #pr tas tasmin pr_no_bc tas_no_bc tasmax_no_bc tasmin_no_bc
-dir_in='/nobackup/users/photiado/icclim_indices_v4.2.3_seapoint_metadata_fixed/EUR-44/BC/tasmax/'
+indir='tasmax_no_bc' #pr tas tasmin pr_no_bc tas_no_bc tasmin_no_bc
+dir_in='/nobackup/users/photiado/icclim_indices_v4.2.3_seapoint_metadata_fixed/EUR-44/No_BC/tasmax/'
 path_ic_inst='icclim-4-2-3_KNMI'
-path_real_bc='r1i1p1_SMHI-RCA4_v1_EUR-44_SMHI-DBS43_EOBS10_bcref-1981-2010_yr'
+path_real_bc='r1i1p1_SMHI-RCA4_v1_EUR-44_yr'
 #=====================
 # Variables
 #=====================
@@ -18,18 +18,18 @@ IFS=$'\n'
 gcms=('CCCma-CanESM2' 'CNRM-CM5' 'CSIRO-Mk3-6-0' 'EC-EARTH' 'IPSL-CM5A-MR' 'MIROC5' 'HadGEM2-ES' 'MPI-ESM-LR' 'NorESM1-M' 'GFDL-ESM2M')
 ind=('ID' 'SU' 'TX')
 indices=('id' 'su' 'tx')
-invar_vari='tasmaxAdjust' #'pr' #'tasminAdjust' 'prAdjust' 'tasAdjust' #tas(nobc)
-exper=('rcp45' 'rcp85' 'historical' )
-bc_method='DBS43' # none
-var_gl='tasmax' # 'tasmin' 'pr' 'tas'
+invar_vari='tasmax' #'pr' #'tasminAdjust' 'prAdjust' 'tasAdjust' #tas(nobc)
+exper=('rcp45' 'rcp85' 'historical')
+#bc_method='DBS43' # none
+var_gl='pr' # 'tasmin' 'tasmax' 'tasmin'
+time_cov_start=('20060101' '20060101' '19700101')
+time_cov_end=('20991231' '20991231' '20051231')
 titles=("id: icing days" \
 		"su: summer days" \
 		"tx: mean of daily maximum temperature")
 summaries=("id is a climate change index definied by the ETCCDI. The indicator counts the number of day where the daily maximum temperature is below 0 degC during a year for a given location" \
 		   "su is a climate change index by ETCCDI. The indicator counts the number of days where daily maximum temperature is above 25 degC during a year for a given location" \
 		   "tx is a climate change index definied by the ECA&D. The indicator measures the mean of daily maximum temperature during a year for a given location")
-time_cov_start=('20060101' '20060101' '19700101')
-time_cov_end=('20991231' '20991231' '20051231')
 #========================================================================
 ### Fix issue for EC_EARTH and HadGem but remember to bringit back at the end!
 #========================================================================
@@ -47,12 +47,11 @@ had_time_end=('20991130' '20991230' '20051230')
 	for i in {0..2}; do #exper
 		echo ${exper[i]} 
 		echo 
-		mv ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ec}_${exper[i]}_r12i1p1_SMHI-RCA4_v1_EUR-44_SMHI-DBS43_EOBS10_bcref-1981-2010_yr_${time_cov_start[i]}-${time_cov_end[i]}.nc ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ec}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
-		
-		mv ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ha}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${had_time_end[i]}.nc ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ha}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc   
+		mv ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ec}_${exper[i]}_r12i1p1_SMHI-RCA4_v1_EUR-44_yr_${time_cov_start[i]}-${time_cov_end[i]}.nc ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ec}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
+
+		mv ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ha}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${had_time_end[i]}.nc ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ha}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
 	done
 done
-
 #========================================================================
 ### Add metadata that are different for every GCM, variable, experiment 
 #========================================================================
@@ -142,11 +141,11 @@ for k in {0..2}; do #indices
 
             ncatted -O -a invar_reanalysis_id,global,o,c,' ' -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
             
-            ncatted -O -a invar_bc_method_id,global,o,c,"SMHI-DBS43" -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
+            ncatted -O -a invar_bc_method_id,global,o,c,' ' -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
 
-            ncatted -O -a invar_bc_observation_id,global,o,c,EOBS10 -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
+            ncatted -O -a invar_bc_observation_id,global,o,c,' ' -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
               
-            ncatted -O -a invar_bc_period,global,o,c,"1981-2010" -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
+            ncatted -O -a invar_bc_period,global,o,c,' ' -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
 
             ncatted -O -a reference_period,global,o,c,' ' -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
 
@@ -188,7 +187,7 @@ for k in {0..2}; do #indices
 				ncatted -O -a references,global,o,c,http://www.ecad.eu/documents/atbd.pdf -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc	
 
 				ncatted -O -a standard_name,${indices[k]},o,c,'ECA&D_indice' -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc	
-				fi
+			fi
 			
 			if [ "${gcms[j]}" = "EC-EARTH" ]; then
 			    ncatted -O -a invar_ensemble_member,global,o,c,r12i1p1 -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
@@ -222,8 +221,8 @@ for k in {0..2}; do #indices
 		echo ${indices[k]}
 		echo ${exper[i]}
 	echo
-		mv ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ec}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ec}_${exper[i]}_r12i1p1_SMHI-RCA4_v1_EUR-44_SMHI-DBS43_EOBS10_bcref-1981-2010_yr_${time_cov_start[i]}-${time_cov_end[i]}.nc
+		mv ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ec}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ec}_${exper[i]}_r12i1p1_SMHI-RCA4_v1_EUR-44_yr_${time_cov_start[i]}-${time_cov_end[i]}.nc
 
 		mv ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ha}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc ${dir_in}${indices[k]}_${path_ic_inst}_${gcm_ha}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${had_time_end[i]}.nc
- done
-done
+	done
+done 

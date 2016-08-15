@@ -200,8 +200,10 @@ for k in {0..7}; do #indices
 			elif [ "${indices[k]}" = "prcptot" ]; then
 				ncatted -O -a long_name,prcptot,o,c,'Precipitation sum in wet days (>1mm)' -h \
 				${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc	
+			
+			fi 
 				
-			elif [ "${gcms[j]}" = "EC-EARTH" ]; then
+			if [ "${gcms[j]}" = "EC-EARTH" ]; then
 			    ncatted -O -a invar_ensemble_member,global,o,c,r12i1p1 -h ${dir_in}${indices[k]}_${path_ic_inst}_${gcms[j]}_${exper[i]}_${path_real_bc}_${time_cov_start[i]}-${time_cov_end[i]}.nc
 
 			elif [ "${gcms[j]}" = "HadGEM2-ES" ]; then
