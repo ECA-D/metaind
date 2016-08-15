@@ -6,13 +6,13 @@
 .travis.yml
 
 # icclim left over files
-/ctypes
-/datetime
-/icclim
-/netCDF4
+ctypes
+datetime
+icclim
+netCDF4
 
 # Parallel testing enviroment to run Tx90p on ECMWF cluster
-parallel/
+/parallel/*
 
 =======
 >>>>>>> 69c45600c5287db998a29916513a25a5b7302cb7
